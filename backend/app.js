@@ -39,7 +39,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 import { authenticationRouter } from "./routes/authenticationRouter.js";
 
-app.use("/signup", authenticationRouter);
+app.use("/", authenticationRouter);
 app.get("/", function (req, res) {
   res.send("welcome to the real estate app");
 });

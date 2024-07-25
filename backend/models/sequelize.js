@@ -12,6 +12,14 @@ const sequelize = new Sequelize(
   }
 );
 
+//verifying if db works
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
+
 const adminLogin = sequelize.define("adminLogin", {
   id: {
     type: DataTypes.INTEGER,
@@ -55,6 +63,7 @@ const signUpModel = sequelize.define("signUpModel", {
   },
 });
 
+/*
 const biodataModel = sequelize.define("biodataModel", {
   id: {
     type: DataTypes.INTEGER,
@@ -98,6 +107,8 @@ const biodataModel = sequelize.define("biodataModel", {
   },
 });
 
+
+*/
 const coursesGradesModel = sequelize.define("coursesGradesModel", {
   id: {
     type: DataTypes.INTEGER,
@@ -126,7 +137,7 @@ await sequelize.sync({ alter: true });
 
 const databaseModels = {
   coursesGradesModel,
-  biodataModel,
+
   signUpModel,
   adminLogin,
 };

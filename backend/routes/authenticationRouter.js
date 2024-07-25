@@ -1,9 +1,11 @@
 import { Router } from "express";
 
-import { signUp } from "../controllers/authenticationController.js";
+import { authenControls } from "../controllers/authenticationController.js";
 
 const authenticationRouter = Router();
 
-authenticationRouter.post("/", signUp);
+authenticationRouter.post("/signup", authenControls.signUp);
+
+authenticationRouter.post("/login", authenControls.login);
 
 export { authenticationRouter };
