@@ -7,18 +7,6 @@ import { Strategy } from "passport-local";
 
 const saltRounds = process.env.SALTROUNDS;
 
-//Session
-app.use(
-  session({
-    secret: process.env.SESSIONSECRET,
-    resave: true,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 500 * 60 * 60,
-    },
-  })
-);
-
 //session
 
 const signUpPost = async function (req, res) {

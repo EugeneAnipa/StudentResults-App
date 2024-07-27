@@ -10,24 +10,12 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import nocache from "nocache";
 import axios from "axios";
-import session from "express-session";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.use(
-  session({
-    secret: "TOPSECRETWORD",
-    resave: true,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 500 * 60 * 60,
-    },
-  })
-);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,13 +26,27 @@ var accessLogStream = fs.createWriteStream((__dirname, "access.log"), {
 });
 app.use(morgan("combined", { stream: accessLogStream }));
 
+//Session
+app.use(
+  session({
+    secret: process.env.SESSIONSECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 500 * 60 * 60,
+    },
+  })
+);
+
 import { authenticationRouter } from "./routes/authenticationRouter.js";
 
 app.use("/", authenticationRouter);
+
+/*
 app.get("/", function (req, res) {
   res.send("welcome to the real estate app");
 });
-
+*/
 app.listen(8000, () => {
   console.log("server is running on 8000");
 });

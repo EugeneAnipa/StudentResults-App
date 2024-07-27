@@ -1,6 +1,15 @@
 import { Sequelize, DataTypes } from "sequelize";
 import mysql from "mysql2/promise";
 
+/** mysql2 db */
+const studentMgtDB = await mysql.createConnection({
+  host: process.env.MYSQL2HOST,
+  user: process.env.MYSQL2USER,
+  database: process.env.MYSQL2DATABSE,
+  password: process.env.MYSQL2PASSWORD,
+});
+/**      mysql2 db */
+
 const sequelize = new Sequelize(
   process.env.SEQUELIZEDATABASE,
   process.env.SEQUELIZEUSER,
