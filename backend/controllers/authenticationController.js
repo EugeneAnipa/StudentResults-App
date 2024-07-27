@@ -5,11 +5,21 @@ import { databaseModels } from "../models/sequelize.js";
 import passport from "passport";
 import { Strategy } from "passport-local";
 
-//import { databaseModels } from "../models/sequelize.js";
-//try putting the two below in app and see if it will still work n and the body parser import also
-const saltRounds = 10;
+const saltRounds = process.env.SALTROUNDS;
 
-//change later to axios
+//Session
+app.use(
+  session({
+    secret: process.env.SESSIONSECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 500 * 60 * 60,
+    },
+  })
+);
+
+//session
 
 const signUpPost = async function (req, res) {
   const firstname = req.body.firstname;
@@ -30,7 +40,7 @@ const signUpPost = async function (req, res) {
       //
 
       await bcrypt.genSalt(saltRounds, function (err, salt) {
-        var salt = bcrypt.genSaltSync(10);
+        var salt = bcrypt.genSaltSync(saltRounds);
 
         bcrypt.hash(password1, salt, function (err, hash) {
           // Store hash in your password DB.
@@ -146,6 +156,22 @@ const passAuth = passport.authenticate("local", {
   failureRedirect: "/login",
 });
 
+const logoutGet = async function (req, res) {
+  console.log("login page");
+};
+
+const logoutPost = async function (req, res) {
+  res.clearCookie("connect.sid");
+  req.logout(function (err) {
+    req.session.destroy(function (err) {
+      res.send();
+      console.log("session destroyed");
+    });
+
+    res.redirect("login page");
+  });
+};
+
 console.log(passport);
 
 passport.use(
@@ -218,6 +244,8 @@ const authenControls = {
   passAuth,
   dashboardGet,
   loginGet,
+  logoutGet,
+  logoutPost,
 };
 console.log(passport);
 export { authenControls };

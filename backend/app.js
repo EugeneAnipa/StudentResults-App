@@ -10,6 +10,7 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import nocache from "nocache";
 import axios from "axios";
+import session from "express-session";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();

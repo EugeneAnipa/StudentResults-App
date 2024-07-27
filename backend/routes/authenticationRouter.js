@@ -16,4 +16,8 @@ authenticationRouter.get("/dashboard", authenControls.dashboardGet);
 
 authenticationRouter.get("/login", authenControls.loginGet);
 
+authenticationRouter.get("/logout", authenControls.logoutGet);
+
+authenticationRouter.post("/logout", authenControls.logoutPost);
+
 export { authenticationRouter };
