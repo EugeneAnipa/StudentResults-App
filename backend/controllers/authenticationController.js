@@ -53,9 +53,9 @@ const signUpPost = async function (req, res) {
 
 //dashboard
 const dashboardGet = async function (req, res) {
-  console.log(req.username);
+  console.log(req.user);
   if (req.isAuthenticated()) {
-    console.log(req.username + " logged into dashbaord");
+    console.log(req.user + " logged into dashbaord");
   } else {
     res.send("login page");
   }
@@ -147,6 +147,7 @@ const passAuth = passport.authenticate("local", {
 });
 
 console.log(passport);
+
 passport.use(
   new Strategy(
     {
@@ -155,14 +156,11 @@ passport.use(
       passReqToCallback: false,
     },
 
-    async function verify(username, password, cb) {
+    async function verify(user, password, cb) {
       try {
-        //const email = req.body.email;
-        //const password1 = req.body.password;
-
         const emailFinder = await databaseModels.signUpModel.findOne({
           where: {
-            email: username,
+            email: user,
           },
         });
         console.log(emailFinder);
@@ -173,7 +171,7 @@ passport.use(
         } else if (!(emailFinder === null)) {
           const passwordFinder = await databaseModels.signUpModel.findOne({
             where: {
-              email: username,
+              email: user,
             },
           });
 
@@ -185,14 +183,19 @@ passport.use(
           await bcrypt.compare(password, foundHash, function (err, result) {
             if (result === true) {
               //res.send("correct password");
-              console.log("correct password");
+              console.log("correct password " + user);
+              return cb(null, user);
             } else if (result === false) {
               //res.send("wrong passwoord");
-              console.log("wrong passwoord");
+              console.log("wrong passwoord ");
+              return cb(null, false);
             }
           });
 
           //console.log(hashComapred);
+        } else {
+          console.log(cb);
+          return cb(null, false);
         }
       } catch (err) {
         console.log(err);
@@ -201,12 +204,12 @@ passport.use(
   )
 );
 
-passport.serializeUser((username, cb) => {
-  cb(null, username);
+passport.serializeUser((user, cb) => {
+  cb(null, user);
 });
 
-passport.deserializeUser((username, cb) => {
-  cb(null, username);
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
 });
 
 const authenControls = {
