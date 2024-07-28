@@ -1,5 +1,7 @@
-import express from "express";
 import "dotenv/config";
+
+import express from "express";
+
 import fs from "node:fs";
 import morgan from "morgan";
 import { dirname } from "path";
@@ -16,10 +18,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(nocache());
 
 var accessLogStream = fs.createWriteStream((__dirname, "access.log"), {
   flags: "a",
@@ -38,9 +36,16 @@ app.use(
   })
 );
 
-import { authenticationRouter } from "./routes/authenticationRouter.js";
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(nocache());
+
+import { authenticationRouter } from "./routes/authentication.Router.js";
+import { dashRouter } from "./routes/dashboard.Router.js";
 
 app.use("/", authenticationRouter);
+
+app.use("/", dashRouter);
 
 /*
 app.get("/", function (req, res) {

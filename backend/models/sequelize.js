@@ -72,7 +72,6 @@ const signUpModel = sequelize.define("signUpModel", {
   },
 });
 
-/*
 const biodataModel = sequelize.define("biodataModel", {
   id: {
     type: DataTypes.INTEGER,
@@ -80,44 +79,51 @@ const biodataModel = sequelize.define("biodataModel", {
     primaryKey: true,
     allowNull: false,
   },
+
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   DOB: {
     type: DataTypes.DATE,
-    allowNull: false,
-  },
-  Address: {
-    addressLine1: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    addressLine2: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    zipcode: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    allowNull: true,
+    validate: {
+      isDate: true,
     },
   },
+
+  addressLine1: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  addressLine2: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  state: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  zipcode: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  country: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
   profilePhotUrl: {
     type: DataTypes.STRING,
     defaultValue: "https://picsum.photos/200/300",
   },
 });
 
-
-*/
 const coursesGradesModel = sequelize.define("coursesGradesModel", {
   id: {
     type: DataTypes.INTEGER,
@@ -149,6 +155,7 @@ const databaseModels = {
 
   signUpModel,
   adminLogin,
+  biodataModel,
 };
 
 export { databaseModels };

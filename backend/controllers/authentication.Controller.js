@@ -1,5 +1,3 @@
-import express from "express";
-
 import bcrypt from "bcryptjs";
 import { databaseModels } from "../models/sequelize.js";
 import passport from "passport";
@@ -39,6 +37,10 @@ const signUpPost = async function (req, res) {
             email: email,
             password: hash,
           });
+          //entering the email to the biodatamodel
+          databaseModels.biodataModel.create({
+            email: email,
+          });
         });
       });
     } else {
@@ -49,11 +51,13 @@ const signUpPost = async function (req, res) {
   }
 };
 
-//dashboard
-const dashboardGet = async function (req, res) {
+//dashboard userPasser
+const userEmailPasserGet = async function (req, res) {
   console.log(req.user);
   if (req.isAuthenticated()) {
-    console.log(req.user + " logged into dashbaord");
+    res.redirect("/main");
+
+    //console.log(req.user + " logged into dashbaord");
   } else {
     res.send("login page");
   }
@@ -230,7 +234,7 @@ const authenControls = {
   signUpPost,
   loginPost,
   passAuth,
-  dashboardGet,
+  userEmailPasserGet,
   loginGet,
   logoutGet,
   logoutPost,

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { authenControls } from "../controllers/authenticationController.js";
+import { authenControls } from "../controllers/authentication.Controller.js";
 
 const authenticationRouter = Router();
 
@@ -12,7 +12,7 @@ authenticationRouter.post(
   authenControls.loginPost
 );
 
-authenticationRouter.get("/dashboard", authenControls.dashboardGet);
+authenticationRouter.get("/dashboard", authenControls.userEmailPasserGet);
 
 authenticationRouter.get("/login", authenControls.loginGet);
 
