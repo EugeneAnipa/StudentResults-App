@@ -83,7 +83,7 @@ const biodataModel = sequelize.define("biodataModel", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    //unique: true,
   },
   DOB: {
     type: DataTypes.DATE,

@@ -9,12 +9,19 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import session from "express-session";
 import passport from "passport";
-import { Strategy } from "passport-local";
+//import { Strategy } from "passport-local";
 import nocache from "nocache";
-import axios from "axios";
+//import axios from "axios";
+import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
+
+app.set("view engine", "ejs");
+app.set("views", "../frontend/views");
+//app.use(express.static("public"));
+
+app.use(express.static(path.join("../frontend/" + "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -42,10 +49,12 @@ app.use(nocache());
 
 import { authenticationRouter } from "./routes/authentication.Router.js";
 import { dashRouter } from "./routes/dashboard.Router.js";
+import { biodataRouter } from "./routes/biodata.Router.js";
 
 app.use("/", authenticationRouter);
 
 app.use("/", dashRouter);
+app.use("/", biodataRouter);
 
 /*
 app.get("/", function (req, res) {

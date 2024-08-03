@@ -52,15 +52,38 @@ const signUpPost = async function (req, res) {
 };
 
 //dashboard userPasser
-const userEmailPasserGet = async function (req, res) {
-  console.log(req.user);
+const userEmailPasserGet = async function (req, res, next) {
+  console.log(req.user + req.user);
+
+  // console.log(PassorFailHolder);
+  next();
+  if (PassorFailHolder[-1] === false) {
+    console.log("attempt to login again");
+    PassorFailHolder = undefined;
+  } else if (PassorFailHolder === req.user) {
+    PassorFailHolder = undefined;
+
+    res.redirect("/main");
+  }
+
+  /*
+
+  PassorFailHolder = undefined;
+
+  console.log(PassorFailHolder);
+
+  console.log(req.isAuthenticated());
+
   if (req.isAuthenticated()) {
     res.redirect("/main");
 
     //console.log(req.user + " logged into dashbaord");
   } else {
-    res.send("login page");
+    console.log("wrong login details");
+    //res.send("login page");
   }
+
+  */
 };
 
 /*
@@ -130,22 +153,21 @@ app.post(
 */
 /** login get*/
 const loginGet = async function (req, res) {
-  console.log("try to sign in");
+  res.render("login.ejs");
 };
 /**  */
+/** test function ,arrays */
+const PassorFailHolder = [];
 
+/** test function  */
 const loginPost = async function (req, res) {
   passAuth;
-  //tru the fxn , passathen, then call everything in
-
-  if ("/login") {
-    console.log("this is the post login details");
-  }
 };
 
 const passAuth = passport.authenticate("local", {
   successRedirect: "/dashboard",
   failureRedirect: "/login",
+  failureMessage: true,
 });
 
 const logoutGet = async function (req, res) {
@@ -160,7 +182,7 @@ const logoutPost = async function (req, res) {
       console.log("session destroyed");
     });
 
-    res.redirect("login page");
+    res.redirect("/login");
   });
 };
 
@@ -185,7 +207,12 @@ passport.use(
 
         if (emailFinder === null) {
           //res.send("account does not exist! create one!");
+          //const wrongEmail = "wrong email address";
           console.log("account does not exist! create one!");
+          PassorFailHolder.push(false);
+          //console.log(PassorFailHolder);
+
+          return cb(null, false, PassorFailHolder);
         } else if (!(emailFinder === null)) {
           const passwordFinder = await databaseModels.signUpModel.findOne({
             where: {
@@ -202,17 +229,22 @@ passport.use(
             if (result === true) {
               //res.send("correct password");
               console.log("correct password " + user);
-              return cb(null, user);
+              PassorFailHolder.push(user);
+              //console.log(PassorFailHolder);
+
+              return cb(null, user, PassorFailHolder);
             } else if (result === false) {
               //res.send("wrong passwoord");
+              PassorFailHolder.push(false);
+              //console.log(PassorFailHolder);
+
               console.log("wrong passwoord ");
-              return cb(null, false);
+              return cb(null, false, PassorFailHolder);
             }
           });
 
           //console.log(hashComapred);
         } else {
-          console.log(cb);
           return cb(null, false);
         }
       } catch (err) {
@@ -221,7 +253,7 @@ passport.use(
     }
   )
 );
-
+console.log(passport.message);
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
