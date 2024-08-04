@@ -15,3 +15,5 @@ fxn with next
 then you console.log it
 
 use status code at front end to solve the login fail issue
+
+setting , will the option to change the profile photo, and change password

@@ -1,0 +1,111 @@
+<%- include('header'); -%>
+
+<main>
+  <div class="container text-center">
+    <div class="text-center">Profile photo</div>
+    <br />
+    <form method="post" action="/biodata" class="align-items-center">
+      <div>
+        <label>
+          <span>Firstname</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>
+          <input type="text" placeholder="<%= locals.biodataInfo.firstname %>" name="firstname"   value="<%= locals.biodataInfo.firstname %>"  required  readonly/>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Lastname</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>
+          <input type="text" name="lastname" placeholder="<%= locals.biodataInfo.lastname %>" value="<%= locals.biodataInfo.lastname %>" required  readonly/>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Email</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"/></svg>
+          <input type="email" name="email" placeholder="<%= locals.biodataInfo.email %>"  value="<%= locals.biodataInfo.email %>" required  readonly/>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>DOB</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-400q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Z"/></svg>
+          <input   class="date"  value="<%= locals.biodataInfo.dob %>"   type="date" name="dob"  placeholder="<%= locals.biodataInfo.dob %>"  required/>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Addressline 1</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
+          <input type="text" name="addressline1" placeholder=""    required />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Addressline 2</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
+          <input type="text" placeholder="" name="adressline2" />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>City</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M120-120v-560h240v-80l120-120 120 120v240h240v400H120Zm80-80h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm240 320h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm240 480h80v-80h-80v80Zm0-160h80v-80h-80v80Z"/></svg>
+          <input type="text" name="city"  placeholder="" required />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>State</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M80-120v-720h400v160h400v560H80Zm80-80h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm160 480h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm0-160h80v-80h-80v80Zm160 480h320v-400H480v80h80v80h-80v80h80v80h-80v80Zm160-240v-80h80v80h-80Zm0 160v-80h80v80h-80Z"/></svg>
+          <input type="text" name="state" placeholder="" required />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Zipcode</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M80-120v-720h400v160h400v560H80Zm80-80h240v-80H160v80Zm0-160h240v-80H160v80Zm0-160h240v-80H160v80Zm0-160h240v-80H160v80Zm320 480h320v-400H480v400Zm80-240v-80h160v80H560Zm0 160v-80h160v80H560Z"/></svg>
+          <input name="zipcode" placeholder="" type="number" required />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>Country</span>
+          <br />
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-120v-680h360l16 80h224v400H520l-16-80H280v280h-80Z"/></svg>
+          <input name="country" placeholder="" type="text" required />
+        </label>
+      </div>
+
+      <br />
+      <div>
+        <button type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+  <!--firstname,lastname,email,dob,addressline1,adressline2,city,state,zipcode,contry,
+  profile
+  s3
+  bucket
+>
+<%- include('footer'); -%>

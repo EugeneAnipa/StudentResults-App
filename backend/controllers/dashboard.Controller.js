@@ -24,6 +24,7 @@ const dashboardGet = async function (req, res) {
       biodata.country === null
     ) {
       //thus get update biodata here
+      res.redirect("/biodata");
       console.log("some fields are null need to be field");
       //you render the biodataupdateget over here
     } else {
@@ -38,6 +39,14 @@ const dashboardGet = async function (req, res) {
 const biodataUpdateGet = async function (req, res) {
   try {
     //just sending the biodate form to be filled
+
+    const biodataGet = await databaseModels.biodataModel.findAll({
+      where: {
+        email: req.user,
+      },
+    });
+    res.locals.biodataInfo = biodataGet;
+    res.render("biodata");
   } catch (err) {
     console.log(err);
   }
@@ -45,7 +54,7 @@ const biodataUpdateGet = async function (req, res) {
 
 const biodataUpdatePost = async function (req, res) {
   try {
-    const biodataUpdate = databaseModels.biodataModel.update(
+    const biodataUpdate = await databaseModels.biodataModel.update(
       { DOB: req.body.dob },
       { addressLine1: req.body.addressline1 },
       { addressLine2: req.body.addressline2 },

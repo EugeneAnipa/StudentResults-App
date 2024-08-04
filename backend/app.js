@@ -54,7 +54,7 @@ import { biodataRouter } from "./routes/biodata.Router.js";
 app.use("/", authenticationRouter);
 
 app.use("/", dashRouter);
-app.use("/", biodataRouter);
+app.use("/biodata", biodataRouter);
 
 /*
 app.get("/", function (req, res) {

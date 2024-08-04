@@ -52,25 +52,8 @@ const signUpPost = async function (req, res) {
 };
 
 //dashboard userPasser
-const userEmailPasserGet = async function (req, res, next) {
+const userEmailPasserGet = async function (req, res) {
   console.log(req.user + req.user);
-
-  // console.log(PassorFailHolder);
-  next();
-  if (PassorFailHolder[-1] === false) {
-    console.log("attempt to login again");
-    PassorFailHolder = undefined;
-  } else if (PassorFailHolder === req.user) {
-    PassorFailHolder = undefined;
-
-    res.redirect("/main");
-  }
-
-  /*
-
-  PassorFailHolder = undefined;
-
-  console.log(PassorFailHolder);
 
   console.log(req.isAuthenticated());
 
@@ -82,8 +65,6 @@ const userEmailPasserGet = async function (req, res, next) {
     console.log("wrong login details");
     //res.send("login page");
   }
-
-  */
 };
 
 /*
@@ -153,11 +134,10 @@ app.post(
 */
 /** login get*/
 const loginGet = async function (req, res) {
-  res.render("login.ejs");
+  res.render("login");
 };
 /**  */
 /** test function ,arrays */
-const PassorFailHolder = [];
 
 /** test function  */
 const loginPost = async function (req, res) {
@@ -209,10 +189,8 @@ passport.use(
           //res.send("account does not exist! create one!");
           //const wrongEmail = "wrong email address";
           console.log("account does not exist! create one!");
-          PassorFailHolder.push(false);
-          //console.log(PassorFailHolder);
 
-          return cb(null, false, PassorFailHolder);
+          return cb(null, false);
         } else if (!(emailFinder === null)) {
           const passwordFinder = await databaseModels.signUpModel.findOne({
             where: {
@@ -229,17 +207,13 @@ passport.use(
             if (result === true) {
               //res.send("correct password");
               console.log("correct password " + user);
-              PassorFailHolder.push(user);
-              //console.log(PassorFailHolder);
 
-              return cb(null, user, PassorFailHolder);
+              return cb(null, user);
             } else if (result === false) {
               //res.send("wrong passwoord");
-              PassorFailHolder.push(false);
-              //console.log(PassorFailHolder);
 
               console.log("wrong passwoord ");
-              return cb(null, false, PassorFailHolder);
+              return cb(null, false);
             }
           });
 
