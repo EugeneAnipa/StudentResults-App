@@ -50,3 +50,7 @@ button {
 input {
   width: 180px;
 }
+
+.passMessageClass {
+  display: none;
+}

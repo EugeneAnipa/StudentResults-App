@@ -4,7 +4,7 @@
         <form method="post" action="/login" class="align-items-center">
           
           <div >
-            
+            <span id="invalid"></span>
           <label>
             <span hx-swap="outerHTML" hx-target="username">Username</span><br />
             <div>
@@ -44,7 +44,7 @@
           </div>
           <br />
           <div >
-            <button type="submit">Login</button>
+            <button type="submit" onclick="loginInvalid()">Login</button>
           </div>
         </form>
       </div>

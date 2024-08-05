@@ -28,8 +28,16 @@ const dashboardGet = async function (req, res) {
       console.log("some fields are null need to be field");
       //you render the biodataupdateget over here
     } else {
+      const resultsGet = await databaseModels.coursesGradesModel.findOne({
+        where: {
+          email: req.user,
+        },
+      });
+      //await databaseModels
       //redirect straight to the main dashboard
-      console.log("all fiekds complete");
+      console.log("all fields complete");
+
+      res.render("main");
     }
   } catch (err) {
     console.log(err);
@@ -40,11 +48,17 @@ const biodataUpdateGet = async function (req, res) {
   try {
     //just sending the biodate form to be filled
 
-    const biodataGet = await databaseModels.biodataModel.findAll({
+    const biodataGet = await databaseModels.biodataModel.findOne({
       where: {
         email: req.user,
       },
     });
+    const signupInfoGet = await databaseModels.signUpModel.findOne({
+      where: {
+        email: req.user,
+      },
+    });
+    res.locals.signupInfo = signupInfoGet;
     res.locals.biodataInfo = biodataGet;
     res.render("biodata");
   } catch (err) {

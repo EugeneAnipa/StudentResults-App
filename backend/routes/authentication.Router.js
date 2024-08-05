@@ -5,6 +5,7 @@ import { authenControls } from "../controllers/authentication.Controller.js";
 const authenticationRouter = Router();
 
 authenticationRouter.post("/signup", authenControls.signUpPost);
+authenticationRouter.get("/signup", authenControls.signUpGet);
 
 authenticationRouter.post(
   "/login",

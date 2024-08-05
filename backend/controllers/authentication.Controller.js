@@ -50,6 +50,11 @@ const signUpPost = async function (req, res) {
     console.log(err);
   }
 };
+//signup get
+
+const signUpGet = async function (req, res) {
+  res.render("signup");
+};
 
 //dashboard userPasser
 const userEmailPasserGet = async function (req, res) {
@@ -238,6 +243,7 @@ passport.deserializeUser((user, cb) => {
 
 const authenControls = {
   signUpPost,
+  signUpGet,
   loginPost,
   passAuth,
   userEmailPasserGet,
