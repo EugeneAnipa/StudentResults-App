@@ -36,6 +36,7 @@ const dashboardGet = async function (req, res) {
       //await databaseModels
       //redirect straight to the main dashboard
       console.log("all fields complete");
+      res.locals.resultsInfo = resultsGet;
 
       res.render("main");
     }
@@ -69,17 +70,19 @@ const biodataUpdateGet = async function (req, res) {
 const biodataUpdatePost = async function (req, res) {
   try {
     const biodataUpdate = await databaseModels.biodataModel.update(
-      { DOB: req.body.dob },
-      { addressLine1: req.body.addressline1 },
-      { addressLine2: req.body.addressline2 },
-      { city: req.body.city },
-      { state: req.body.state },
-      { zipcode: req.body.zipcode },
-      { country: req.body.country },
+      {
+        DOB: req.body.dob,
+        addressLine1: req.body.addressline1,
+        addressLine2: req.body.addressline2,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode,
+        country: req.body.country,
+      },
       { where: { email: req.user } }
     );
-
-    biodataUpdate;
+    res.redirect("/main");
+    //biodataUpdate;
     //after submit, redirect to main dashboard to see results
   } catch (err) {
     console.log(err);

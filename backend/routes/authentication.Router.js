@@ -21,4 +21,10 @@ authenticationRouter.get("/logout", authenControls.logoutGet);
 
 authenticationRouter.post("/logout", authenControls.logoutPost);
 
+authenticationRouter.get("/loginfail", authenControls.loginFailure);
+
+authenticationRouter.post("/loginfail", authenControls.loginFailurePost);
+
+//loginFailure
+
 export { authenticationRouter };

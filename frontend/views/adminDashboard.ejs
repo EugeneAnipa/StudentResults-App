@@ -1,0 +1,30 @@
+<%- include('header'); -%>
+
+<main>
+  <div class="container" hx-post="/admin/" id="this" hx-swap="outerHTML">
+    <% locals.students %>
+    <div class="container-fluid">
+      <ul>
+        <% for(var i = 0; i < students.length;i++) { %>
+
+        <li>
+          <label
+            ><a
+              hx-post="/admin/student/<%= locals.students[i].email %>"
+              value="<%= locals.students[i].email %>"
+              hx-trigger="click"
+              hx-target="#this"
+            >
+              <%= locals.students[i].firstname + " " +
+              locals.students[i].lastname%>
+            </a>
+          </label>
+        </li>
+
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<%- include('footer'); -%>

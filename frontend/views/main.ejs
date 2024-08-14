@@ -15,27 +15,39 @@
           <tr>
             <th scope="row">1</th>
             <td>Biology</td>
-            <td><em><%= %></em></td>
+            <td>
+              <em id="biology"><%=locals.resultsInfo.biology %></em><em> %</em>
+            </td>
           </tr>
           <tr>
             <th scope="row">2</th>
             <td>Maths</td>
-            <td><em><%= %></em></td>
+            <td>
+              <em id="maths"><%= locals.resultsInfo.mathematics %></em
+              ><em> %</em>
+            </td>
           </tr>
           <tr>
             <th scope="row">3</th>
             <td>Science</td>
-            <td><em><%= %></em></td>
+            <td>
+              <em id="science"><%= locals.resultsInfo.science %></em><em> %</em>
+            </td>
           </tr>
 
           <tr>
             <th scope="row">3</th>
             <td>English</td>
-            <td><em><%= %></em></td>
+            <td>
+              <em id="english"><%= locals.resultsInfo.english %></em><em> %</em>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="container text-center canvasWrapper">
+    <canvas class="container text-center" id="myChart"></canvas>
   </div>
 </main>
 

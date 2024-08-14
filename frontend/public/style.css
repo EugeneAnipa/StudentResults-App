@@ -8,13 +8,10 @@
   --body-color: ;
 }
 
-.darkmode {
-}
-
 body {
   font-family: "Poppins", "Roboto", sans-serif;
   background-color: var(--body-color);
-  color: aliceblue;
+  color: var(--base-color);
 }
 
 nav {
@@ -51,6 +48,25 @@ input {
   width: 180px;
 }
 
-.passMessageClass {
+.canvasWrapper {
+  width: 20em;
+  height: 20em;
+}
+
+canvas {
+  width: 20em;
+  height: 20em;
+  border: 5px solid --var(--base-color);
+  margin: 5em;
+}
+
+.hidePassword {
   display: none;
+}
+.passErrorClass {
+  color: red;
+}
+
+ul li {
+  list-style: none;
 }

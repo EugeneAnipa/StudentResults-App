@@ -3,7 +3,8 @@ import { databaseModels } from "../models/sequelize.js";
 import passport from "passport";
 import { Strategy } from "passport-local";
 
-const saltRounds = process.env.SALTROUNDS;
+//const saltRounds = process.env.SALTROUNDS;
+const saltRounds = 10;
 
 //session
 
@@ -43,8 +44,19 @@ const signUpPost = async function (req, res) {
           });
         });
       });
+      res.locals.loggedMSg = "Account Created Sign In";
+      let html = `<p  hx-swap="outerHTML" hx-target="msgPasser"><%= LoggedMsg %></p>`;
+
+      res.render("signup", (err, html) => {
+        res.send(html);
+      });
     } else {
-      res.send("user account exists");
+      res.locals.loggedMSg = "Email already exists! Try Again";
+      let html = `<p  hx-swap="outerHTML" hx-target="msgPasser"><%= LoggedMsg %></p>`;
+
+      res.render("signup", (err, html) => {
+        res.send(html);
+      });
     }
   } catch (err) {
     console.log(err);
@@ -53,7 +65,12 @@ const signUpPost = async function (req, res) {
 //signup get
 
 const signUpGet = async function (req, res) {
-  res.render("signup");
+  res.locals.loggedMSg = "";
+  let html = `<p  hx-swap="outerHTML" hx-target="msgPasser"><%= LoggedMsg %></p>`;
+
+  res.render("signup", (err, html) => {
+    res.send(html);
+  });
 };
 
 //dashboard userPasser
@@ -142,12 +159,35 @@ const loginGet = async function (req, res) {
   res.render("login");
 };
 /**  */
-/** test function ,arrays */
+/** test function  */
 
 /** test function  */
 const loginPost = async function (req, res) {
   passAuth;
+  console.log(req.flash);
 };
+
+/**  login failure handle here  */
+const loginFailure = async function (req, res) {
+  if (req.isUnauthenticated()) {
+    // console.log("wrong input details");
+    res.render("login");
+  }
+};
+
+/**  login failure handle here  */
+
+/**  login failure handle here post */
+const loginFailurePost = async function (req, res) {
+  let html = "Wrong Login details";
+  setTimeout(() => {
+    res.send(html);
+  }, 2000);
+
+  //res.send(html);
+};
+
+/**  login failure handle here post */
 
 const passAuth = passport.authenticate("local", {
   successRedirect: "/dashboard",
@@ -195,7 +235,7 @@ passport.use(
           //const wrongEmail = "wrong email address";
           console.log("account does not exist! create one!");
 
-          return cb(null, false);
+          return cb(null, false, wrongUser);
         } else if (!(emailFinder === null)) {
           const passwordFinder = await databaseModels.signUpModel.findOne({
             where: {
@@ -232,7 +272,7 @@ passport.use(
     }
   )
 );
-console.log(passport.message);
+
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });
@@ -250,6 +290,9 @@ const authenControls = {
   loginGet,
   logoutGet,
   logoutPost,
+  loginFailure,
+  loginFailurePost,
 };
 console.log(passport);
+
 export { authenControls };

@@ -131,20 +131,25 @@ const coursesGradesModel = sequelize.define("coursesGradesModel", {
     primaryKey: true,
     allowNull: false,
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    //unique: true,
+  },
   biology: {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
   mathematics: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: true,
   },
   science: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: true,
   },
   english: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: true,
   },
 });
@@ -156,6 +161,8 @@ const databaseModels = {
   signUpModel,
   adminLogin,
   biodataModel,
+  sequelize,
+  studentMgtDB,
 };
 
 export { databaseModels };

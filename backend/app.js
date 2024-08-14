@@ -50,11 +50,13 @@ app.use(nocache());
 import { authenticationRouter } from "./routes/authentication.Router.js";
 import { dashRouter } from "./routes/dashboard.Router.js";
 import { biodataRouter } from "./routes/biodata.Router.js";
+import { adminPortalRouter } from "./routes/adminDashboard.Router.js";
 
 app.use("/", authenticationRouter);
 
 app.use("/", dashRouter);
 app.use("/biodata", biodataRouter);
+app.use("/admin", adminPortalRouter);
 
 /*
 app.get("/", function (req, res) {
