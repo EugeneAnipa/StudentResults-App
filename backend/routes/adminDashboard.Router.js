@@ -8,4 +8,6 @@ adminPortalRouter.get("/", adminControls.adminPortalGet);
 
 adminPortalRouter.post("/student/:email", adminControls.getStudentsGet);
 
+adminPortalRouter.get("/poll", adminControls.poll);
+
 export { adminPortalRouter };

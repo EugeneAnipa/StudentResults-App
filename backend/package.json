@@ -21,6 +21,7 @@
     "nocache": "^4.0.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "ws": "^8.18.0"
   }
 }

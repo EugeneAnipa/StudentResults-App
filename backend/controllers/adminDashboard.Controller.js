@@ -22,6 +22,14 @@ const adminPortalGet = async function (req, res) {
   }
 };
 
+let counter = 0;
+
+const poll = async function (req, res) {
+  counter++;
+  const data = counter;
+  console.log(data);
+  res.json(data);
+};
 const adminPortalPost = async function (req, res) {};
 
 const updateResultGet = async function (req, res) {};
@@ -113,6 +121,7 @@ const adminControls = {
   updateResultPost,
   getStudentsGet,
   getStudentsPost,
+  poll,
 };
 
 export { adminControls };

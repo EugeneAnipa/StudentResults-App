@@ -70,3 +70,22 @@ canvas {
 ul li {
   list-style: none;
 }
+
+.notibell {
+  float: right;
+  margin-bottom: 20rem;
+  color: var(--base-variant);
+
+  z-index: 2;
+}
+.notinum {
+  color: var(--base-color);
+  float: right;
+
+  z-index: 3;
+}
+
+.noti {
+  float: right;
+  position: absolute;
+}

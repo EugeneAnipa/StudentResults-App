@@ -14,6 +14,11 @@ import nocache from "nocache";
 //import axios from "axios";
 import path from "path";
 
+/**    ws webscoket  */
+import http from "http";
+
+/**    ws webscoket  */
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
@@ -63,6 +68,24 @@ app.get("/", function (req, res) {
   res.send("welcome to the real estate app");
 });
 */
+
+/**    ws webscoket  */
+/*
+import WebSocket, { WebSocketServer } from "ws";
+
+const server = http.createServer(app);
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on("connection", function connection(ws) {
+  ws.on("message", function incoming(message) {
+    console.log("recieved: %s", message);
+  });
+  ws.send("this is a message");
+});
+*/
+/**    ws webscoket  */
+
 app.listen(8000, () => {
   console.log("server is running on 8000");
 });
