@@ -9,13 +9,18 @@ authenticationRouter.get("/signup", authenControls.signUpGet);
 
 authenticationRouter.post(
   "/login",
-  authenControls.passAuth,
-  authenControls.loginPost
+  authenControls.passAuth /*,
+  authenControls.loginPost */
 );
 
 authenticationRouter.get("/dashboard", authenControls.userEmailPasserGet);
 
-authenticationRouter.get("/login", authenControls.loginGet);
+authenticationRouter.get(
+  "/login",
+  authenControls.loginGet /*,
+  authenControls.passAuth */
+);
+authenticationRouter.post("/login", authenControls.passAuth);
 
 authenticationRouter.get("/logout", authenControls.logoutGet);
 

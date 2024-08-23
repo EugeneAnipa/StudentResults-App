@@ -74,17 +74,18 @@ const signUpGet = async function (req, res) {
 };
 
 //dashboard userPasser
-const userEmailPasserGet = async function (req, res) {
+const userEmailPasserGet = async function (req, res, next) {
   console.log(req.user + req.user);
 
   console.log(req.isAuthenticated());
 
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() === true) {
     res.redirect("/main");
-
+    next();
     //console.log(req.user + " logged into dashbaord");
-  } else {
-    console.log("wrong login details");
+  } else if (req.isUnauthenticated() === true) {
+    console.log("wrong login details here again f");
+
     //res.send("login page");
   }
 };
@@ -155,17 +156,16 @@ app.post(
 //to test and delete   down
 */
 /** login get*/
-const loginGet = async function (req, res) {
-  res.render("login");
+const loginGet = async function (req, res, next) {
+  console.log(req.method);
+
+  res.render("login", { error: req.flash() });
 };
 /**  */
 /** test function  */
 
 /** test function  */
-const loginPost = async function (req, res) {
-  passAuth;
-  console.log(req.flash);
-};
+const loginPost = async function (req, res) {};
 
 /**  login failure handle here  */
 const loginFailure = async function (req, res) {
@@ -192,7 +192,7 @@ const loginFailurePost = async function (req, res) {
 const passAuth = passport.authenticate("local", {
   successRedirect: "/dashboard",
   failureRedirect: "/login",
-  failureMessage: true,
+  failureFlash: true,
 });
 
 const logoutGet = async function (req, res) {
@@ -218,10 +218,15 @@ passport.use(
     {
       usernameField: "username",
       passwordField: "password",
-      passReqToCallback: false,
+      passReqToCallback: true,
     },
 
-    async function verify(user, password, cb) {
+    async function verify(req, user, password, cb) {
+      // const user = req.body.username;
+      // const password = req.body.password;
+      console.log({ user });
+      console.log({ cb });
+      //console.log(req.session.messages);
       try {
         const emailFinder = await databaseModels.signUpModel.findOne({
           where: {
@@ -235,7 +240,9 @@ passport.use(
           //const wrongEmail = "wrong email address";
           console.log("account does not exist! create one!");
 
-          return cb(null, false, wrongUser);
+          return cb(null, false, {
+            message: "Account does not exist!",
+          });
         } else if (!(emailFinder === null)) {
           const passwordFinder = await databaseModels.signUpModel.findOne({
             where: {
@@ -258,7 +265,10 @@ passport.use(
               //res.send("wrong passwoord");
 
               console.log("wrong passwoord ");
-              return cb(null, false);
+
+              return cb(null, false, {
+                message: `Incorrect Password`,
+              });
             }
           });
 

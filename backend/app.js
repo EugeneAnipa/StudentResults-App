@@ -13,9 +13,23 @@ import passport from "passport";
 import nocache from "nocache";
 //import axios from "axios";
 import path from "path";
+import flash from "connect-flash";
 
 /**    ws webscoket  */
-import http from "http";
+import { WebSocketServer } from "ws";
+const wss = new WebSocketServer({ port: 8080 });
+
+/** web socket server */
+const chatTest = wss.on("connection", function connection(ws) {
+  ws.on("error", console.error);
+
+  ws.on("message", function message(data) {
+    console.log("received: %s", data);
+  });
+
+  ws.send("something");
+});
+/** web socket server */
 
 /**    ws webscoket  */
 
@@ -30,7 +44,7 @@ app.use(express.static(path.join("../frontend/" + "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(flash());
 var accessLogStream = fs.createWriteStream((__dirname, "access.log"), {
   flags: "a",
 });
